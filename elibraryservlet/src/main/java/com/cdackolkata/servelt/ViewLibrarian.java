@@ -3,8 +3,10 @@ package com.cdackolkata.servelt;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
 import java.util.List;
 
+import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -29,8 +31,9 @@ public class ViewLibrarian extends HttpServlet {
 		
 		request.getRequestDispatcher("navadmin.html").include(request, response);
 		out.println("<div class='container'>");
-		
-		List<LibrarianBean> list=LibrarianDao.view();
+		ServletContext ctx=getServletContext();  
+		Connection conn=(Connection) ctx.getAttribute("mycon");  
+		List<LibrarianBean> list=LibrarianDao.view(conn);
 		
 		out.println("<table class='table table-bordered table-striped'>");
 		out.println("<tr><th>Id</th><th>Name</th><th>Email</th><th>Password</th><th>Mobile</th><th>Edit</th><th>Delete</th></tr>");

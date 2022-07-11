@@ -46,11 +46,11 @@ public class LibrarianDao {
 		
 		return status;
 	}
-	public static List<LibrarianBean> view(){
+	public static List<LibrarianBean> view(Connection conn){
 		List<LibrarianBean> list=new ArrayList<LibrarianBean>();
 		try{
 			Connection con=DB.getCon();
-			PreparedStatement ps=con.prepareStatement("select * from e_librarian");
+			PreparedStatement ps=conn.prepareStatement("select * from e_librarian");
 			ResultSet rs=ps.executeQuery();
 			while(rs.next()){
 				LibrarianBean bean=new LibrarianBean();
